@@ -30,4 +30,4 @@ portForward:
     resourceName: code-server-service
     namespace: eoap-cwl
     port: 8080
-    localPort: 8000  # Port on your local machine
+    localPort: 8000

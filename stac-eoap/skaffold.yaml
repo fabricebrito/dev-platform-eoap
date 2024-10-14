@@ -1,55 +1,38 @@
 apiVersion: skaffold/v4beta9
 kind: Config
 metadata:
-  name: eoap-zoo-project
+  name: eoap-stac
     
 deploy:
   helm:
     releases:
-      - name: zoo-project-dru
-        remoteChart: zoo-project/zoo-project-dru
-        namespace: eoap-zoo-project
-        createNamespace: true
-        version: 0.3.0
-        valuesFiles: []
-        setValues:
-          iam.enabled: false
-      - name: eoap-zoo-project-coder
+      - name: eoap-stac
         chartPath: ../charts/coder
-        namespace: eoap-zoo-project
+        namespace: eoap-stac
         createNamespace: true
         setValues:
           coder.coderImage: eoepca/pde-code-server:1.0.0
-          coder.workspace: ogc-api-processes-with-zoo
+          coder.workspace: stac-eoap
           coderstorageClassName: standard
           coder.workspaceStorage: 10Gi
           coderResources.limits.cpu: '2'
           coderResources.limits.memory: '6442450944'
           coderResources.requests.cpu: '1'
           coderResources.requests.memory: '4294967296'
-          calrissian.enabled: true
         setFiles: {
           initScript: ./files/init.sh,
           bashrcScript: ./files/bash-rc,
           bashloginScript: ./files/bash-login
         }
-      - name: eoap-zoo-project-localstack
+      - name: eoap-stac-localstack
         remoteChart: localstack/localstack
-        namespace: eoap-zoo-project
+        namespace: eoap-stac
         createNamespace: true
         setValues:
           service.type: ClusterIP
-
 portForward:
   - resourceType: service
     resourceName: code-server-service
-    namespace: eoap-zoo-project
-    address: localhost
+    namespace: eoap-stac
     port: 8080
-    localPort: 8000  
-  - resourceType: service
-    resourceName: zoo-project-dru-service
-    namespace: eoap-zoo-project  
-    address: localhost
-    port: 80
-    localPort: 8080  
+    localPort: 8000
