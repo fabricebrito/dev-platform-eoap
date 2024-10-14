@@ -10,10 +10,12 @@ deploy:
         remoteChart: zoo-project/zoo-project-dru
         namespace: eoap-zoo-project
         createNamespace: true
-        version: 0.3.0
+        version: 0.3.2
         valuesFiles: []
         setValues:
           iam.enabled: false
+          cookiecutter. templateUrl: https://github.com/EOEPCA/proc-service-template.git
+          cookiecutter.templateBranch: feature/python3.8
       - name: eoap-zoo-project-coder
         chartPath: ../charts/coder
         namespace: eoap-zoo-project
