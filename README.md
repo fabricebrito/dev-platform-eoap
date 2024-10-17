@@ -42,6 +42,13 @@ OpenLens is a graphical user interface for managing and monitoring Kubernetes cl
 
 While it's optional, it can significantly improve your workflow. You can download it [here](https://github.com/MuhammedKalkan/OpenLens?tab=readme-ov-file#installation).
 
+### Add the helm repositories
+
+
+```
+helm repo add localstack https://helm.localstack.cloud
+helm repo add zoo-project https://zoo-project.github.io/charts/
+```
 
 ### Checking the requirements
 
