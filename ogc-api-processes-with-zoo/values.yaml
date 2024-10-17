@@ -1,4 +1,5 @@
 files:
+
   cwlwrapperAssets:
     main.yaml: |
       class: Workflow
