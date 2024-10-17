@@ -11,11 +11,20 @@ deploy:
         namespace: eoap-zoo-project
         createNamespace: true
         version: 0.3.2
-        valuesFiles: []
+        valuesFiles: 
+        - values.yaml
         setValues:
           iam.enabled: false
-          cookiecutter. templateUrl: https://github.com/EOEPCA/proc-service-template.git
-          cookiecutter.templateBranch: feature/python3.8
+          cookiecutter.templateUrl: https://github.com/eoap/zoo-service-template.git
+          cookiecutter.templateBranch: feature-collection
+          filter_in.enabled: true
+          filter_out.enabled: true
+          persistence.procServicesAccessMode: ReadWriteMany
+        # setFiles: {
+        #   files.cwlwrapperAssets."main.yaml": ./files/cwlwrapper-assets/main.yaml,
+        # }
+          # files.cwlwrapperAssets:
+          #   "main.yaml": "a:1"
       - name: eoap-zoo-project-coder
         chartPath: ../charts/coder
         namespace: eoap-zoo-project
@@ -30,6 +39,7 @@ deploy:
           coderResources.requests.cpu: '1'
           coderResources.requests.memory: '4294967296'
           calrissian.enabled: true
+          
         setFiles: {
           initScript: ./files/init.sh,
           bashrcScript: ./files/bash-rc,
