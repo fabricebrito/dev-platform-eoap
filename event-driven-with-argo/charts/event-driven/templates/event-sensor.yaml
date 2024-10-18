@@ -32,6 +32,8 @@ spec:
                   parameters:
                   - name: items
                   - name: aoi
+                  - name: epsg
+                    value: "EPSG:4326"
                 workflowTemplateRef:
                   name: water-bodies-detection
           parameters:
