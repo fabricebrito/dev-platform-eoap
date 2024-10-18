@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Sensor
 metadata:
-  name: event-driven-sensor
+  name: water-bodies-detection-sensor
 spec:
   eventBusName: jetstream-event-bus
   template:
     serviceAccountName: argo
   dependencies:
     - name: redis-stream
-      eventSourceName: redis-stream-source
+      eventSourceName: sentinel2-stream-source
       eventName: acquisition-event
   triggers:
     - template:

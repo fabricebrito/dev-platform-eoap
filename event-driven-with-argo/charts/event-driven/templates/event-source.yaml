@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: EventSource
 metadata:
-  name: redis-stream-source
+  name: sentinel2-stream-source
 spec:
   eventBusName: jetstream-event-bus
   redisStream:
