@@ -3,11 +3,11 @@
         "Services": {
             "results": {
                 "UrlPattern": "s3:\/\/results\/.*",
-                "Region": "it-rom",
-                "AuthenticationRegion": "it-rom",
-                "AccessKey": "minio-admin",
-                "SecretKey": "minio-admin",
-                "ServiceURL": "http://minio.ns1.svc.cluster.local:9000",
+                "Region": "us-east-1",
+                "AuthenticationRegion": "us-east-1",
+                "AccessKey": "test",
+                "SecretKey": "test",
+                "ServiceURL": "http://eoap-event-driven-localstack.eoap-event-driven.svc.cluster.local:4566",
                 "ForcePathStyle": "true"
             }
         }
