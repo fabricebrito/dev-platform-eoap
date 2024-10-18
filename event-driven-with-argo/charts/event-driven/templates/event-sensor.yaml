@@ -10,6 +10,8 @@ spec:
     - name: redis-stream
       eventSourceName: sentinel2-stream-source
       eventName: acquisition-event
+      transform:
+        jq: ".values.href = [ .values.href ]"
   triggers:
     - template:
         name: water-bodies-detection-trigger
