@@ -1,0 +1,12 @@
+apiVersion: argoproj.io/v1alpha1
+kind: EventSource
+metadata:
+  name: redis-stream-source
+spec:
+  eventBusName: jetstream-event-bus
+  redisStream:
+    acquisition-event:
+      hostAddress: redis-service:6379
+      db: 0
+      streams:
+        - {{ .Values.streamName }}
