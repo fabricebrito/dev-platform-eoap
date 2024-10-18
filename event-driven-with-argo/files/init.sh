@@ -19,4 +19,5 @@ source /workspace/.venv/bin/activate
 export AWS_DEFAULT_REGION="us-east-1"
 export AWS_ACCESS_KEY_ID="test"
 export AWS_SECRET_ACCESS_KEY="test"
-#aws s3 mb s3://results --endpoint-url=http://eoap-zoo-project-localstack:4566
+aws s3 mb s3://results --endpoint-url=http://eoap-event-driven-localstack:4566
+aws s3 mb s3://workflows --endpoint-url=http://eoap-event-driven-localstack:4566

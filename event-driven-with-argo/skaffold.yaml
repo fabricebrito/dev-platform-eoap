@@ -21,6 +21,7 @@ deploy:
         remoteChart: argo/argo-workflows
         namespace: eoap-event-driven
         createNamespace: true
+        wait: true
         setValues:
           crds.install: false
           server.authModes: [server]
@@ -38,11 +39,22 @@ deploy:
               spec:
                 serviceAccountName: argo
             rbac.writeConfigMaps: true
-
+            securityContext.runAsNonRoot: false
+          artifactRepository.s3:
+            bucket: workflows
+            endpoint: eoap-event-driven-localstack:4566
+            insecure: true
+            accessKeySecret:
+              name: localstack-cred
+              key: accesskey
+            secretKeySecret:
+              name: localstack-cred
+              key: secretkey
       # argo events
       - name: eoap-argo-events
         remoteChart: argo/argo-events
         namespace: eoap-event-driven
+        wait: true
         createNamespace: true
         setValues:
           crds.install: false
@@ -67,6 +79,7 @@ deploy:
         chartPath: ./charts/event-driven
         namespace: eoap-event-driven
         createNamespace: true
+        wait: true
         setValues:
           jetstreamReplicas: 3
           jetstreamVolumeSize: 1Gi
@@ -96,12 +109,19 @@ deploy:
         setValues: 
           storageClassRWX: "standard"
 
-
+      - name: eoap-event-driven-localstack
+        remoteChart: localstack/localstack
+        namespace: eoap-event-driven
+        createNamespace: true
+        wait: true
+        setValues:
+          service.type: ClusterIP
 
       - name: eoap-event-driven-coder
         chartPath: ../charts/coder
         namespace: eoap-event-driven
         createNamespace: true
+        wait: true
         setValues:
           coder.coderImage: eoepca/pde-code-server:1.0.0
           coder.workspace: eoap-event-driven-with-argo
@@ -117,12 +137,7 @@ deploy:
           bashrcScript: ./files/bash-rc,
           bashloginScript: ./files/bash-login
         }
-      # - name: eoap-event-driven-localstack
-      #   remoteChart: localstack/localstack
-      #   namespace: eoap-event-driven
-      #   createNamespace: true
-      #   setValues:
-      #     service.type: ClusterIP
+      
 
 portForward: 
   - resourceType: service
