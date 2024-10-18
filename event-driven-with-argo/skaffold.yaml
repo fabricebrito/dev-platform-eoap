@@ -2,7 +2,17 @@ apiVersion: skaffold/v4beta9
 kind: Config
 metadata:
   name: eoap-event-driven
-    
+build:
+  artifacts:
+  - image: stageout
+    context: stage-out
+    docker:
+      dockerfile: Dockerfile
+  - image: validateschema
+    context: validate-schema
+    docker:
+      dockerfile: Dockerfile
+
 deploy:
   helm:
     releases:
@@ -27,6 +37,7 @@ deploy:
             workflowDefaults:
               spec:
                 serviceAccountName: argo
+            rbac.writeConfigMaps: true
 
       # argo events
       - name: eoap-argo-events
@@ -35,6 +46,11 @@ deploy:
         createNamespace: true
         setValues:
           crds.install: false
+          controller:
+            rbac:
+              enabled: true
+              namespaced: true
+              managedNamespace: eoap-event-driven
 
 
       - name: eoap-redis
@@ -46,10 +62,6 @@ deploy:
           maxMemoryPolicy: allkeys-lru
           port: 6379
         
-      # argo cwl runner
-
-      # argo water bodies
-
       # local chart for event bus/source/sensor - NEEDS TESTING
       - name: eoap-event-driven
         chartPath: ./charts/event-driven
@@ -60,6 +72,31 @@ deploy:
           jetstreamVolumeSize: 1Gi
           streamName: STREAM
 
+      # argo cwl runner
+      - name: argo-cwl-runner
+        chartPath: argo-cwl-runner
+        namespace: eoap-event-driven
+        valuesFiles:
+          - argo-cwl-runner/values.yaml
+        setValueTemplates:
+          stageOutImage: "{{.IMAGE_NAME_stageout}}:{{.IMAGE_TAG_stageout}}"
+        setFiles: {
+          userSettings: ./argo-cwl-runner/files/user-settings.json
+        }
+      # argo water bodies
+      - name: argo-water-bodies
+        chartPath: argo-water-bodies
+        namespace: eoap-event-driven
+        valuesFiles:
+          - argo-water-bodies/values.yaml
+        setFiles: {
+          appPackage: ./argo-water-bodies/files/app-package.json,
+          inputSchema: ./argo-water-bodies/files/input-parameters-schema.json
+        }
+        setValues: 
+          storageClassRWX: "standard"
+
+
 
       - name: eoap-event-driven-coder
         chartPath: ../charts/coder
@@ -67,7 +104,7 @@ deploy:
         createNamespace: true
         setValues:
           coder.coderImage: eoepca/pde-code-server:1.0.0
-          coder.workspace: eoap-event-driven
+          coder.workspace: eoap-event-driven-with-argo
           coderstorageClassName: standard
           coder.workspaceStorage: 10Gi
           coderResources.limits.cpu: '2'
