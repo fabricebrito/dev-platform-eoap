@@ -32,6 +32,7 @@ spec:
                   parameters:
                   - name: items
                   - name: aoi
+                    value: "-121.399,39.834,-120.74,40.472"
                   - name: epsg
                     value: "EPSG:4326"
                 workflowTemplateRef:
@@ -39,9 +40,5 @@ spec:
           parameters:
             - src:
                 dependencyName: redis-stream
-                dataKey: values.items
+                dataKey: values.href
               dest: spec.arguments.parameters.0.value
-            - src:
-                dependencyName: redis-stream
-                dataKey: values.aoi
-              dest: spec.arguments.parameters.1.value
