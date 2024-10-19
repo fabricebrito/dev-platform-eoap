@@ -38,6 +38,9 @@ deploy:
             workflowDefaults:
               spec:
                 serviceAccountName: argo
+                podGC:
+                  strategy: OnWorkflowCompletion
+                  deleteDelayDuration: 120s
             rbac.writeConfigMaps: true
             securityContext.runAsNonRoot: false
           artifactRepository.s3:
@@ -74,7 +77,7 @@ deploy:
           maxMemoryPolicy: allkeys-lru
           port: 6379
         
-      # local chart for event bus/source/sensor - NEEDS TESTING
+      # local chart for event bus/source/sensor
       - name: eoap-event-driven
         chartPath: ./charts/event-driven
         namespace: eoap-event-driven
