@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Sensor
+metadata:
+  name: redis-stream-logger
+spec:
+  eventBusName: jetstream-event-bus
+
+  dependencies:
+    - name: redis-stream-dependency
+      eventSourceName: sentinel2-stream-source
+      eventName: acquisition-event
+  triggers:
+    - template:
+        name: log-event
+        log:
+          intervalSeconds: 5 # Frequency of log updates
