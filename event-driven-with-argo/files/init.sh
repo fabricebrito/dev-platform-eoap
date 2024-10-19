@@ -2,7 +2,9 @@ cd /workspace
 
 #temp
 mkdir event-driven-with-argo
-#git clone https://github.com/eoap/event-driven-with-argo.git
+git clone https://github.com/eoap/event-driven-with-argo.git
+cd event-driven-with-argo
+git checkout develop
 
 code-server --install-extension ms-python.python 
 code-server --install-extension ms-toolsai.jupyter
