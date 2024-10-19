@@ -10,3 +10,4 @@ spec:
       db: 0
       streams:
         - {{ .Values.streamName }}
+      consumerGroup: sentinel2-stream-consumer
