@@ -180,4 +180,9 @@ spec:
         image: redis:alpine
         command: [sh, -c]
         source: |
-          redis-cli -h redis-service -p 6379 XADD WATERBODIES * message "{\"message\": \"Workflow {{ `{{workflow.name}}` }} has completed with status {{ `{{workflow.status}}` }}\", \"item\": {{ `{{workflow.parameters.items}}` }}}"
+          message="Workflow {{ `{{workflow.name}}` }} has completed with status {{ `{{workflow.status}}` }}"
+          item="{{ `{{workflow.parameters.items}}` }}"
+          item="${item:1:-1}"
+          catalog="s3://results/{{ `{{workflow.name}}`}}-{{ `{{workflow.uid}}` }}/catalog.json"
+          echo "XADD WATERBODIES * message '{\"message\": \"$message\", \"href\": \"$item\", \"stac-catalog\": \"$catalog\"}'" | redis-cli -h redis-service -p 6379
+          
