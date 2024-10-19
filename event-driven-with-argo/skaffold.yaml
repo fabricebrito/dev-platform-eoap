@@ -127,7 +127,7 @@ deploy:
         wait: true
         setValues:
           coder.coderImage: eoepca/pde-code-server:1.0.0
-          coder.workspace: eoap-event-driven-with-argo
+          coder.workspace: event-driven-with-argo
           coderstorageClassName: standard
           coder.workspaceStorage: 10Gi
           coderResources.limits.cpu: '2'
