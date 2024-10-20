@@ -5,11 +5,11 @@ metadata:
 build:
   artifacts:
   - image: stageout
-    context: stage-out
+    context: containers/stage-out
     docker:
       dockerfile: Dockerfile
   - image: validateschema
-    context: validate-schema
+    context: containers/validate-schema
     docker:
       dockerfile: Dockerfile
 
@@ -90,24 +90,24 @@ deploy:
 
       # argo cwl runner
       - name: argo-cwl-runner
-        chartPath: argo-cwl-runner
+        chartPath: ./charts/argo-cwl-runner
         namespace: eoap-event-driven
         valuesFiles:
-          - argo-cwl-runner/values.yaml
+          - ./charts/argo-cwl-runner/values.yaml
         setValueTemplates:
           stageOutImage: "{{.IMAGE_NAME_stageout}}:{{.IMAGE_TAG_stageout}}"
         setFiles: {
-          userSettings: ./argo-cwl-runner/files/user-settings.json
+          userSettings: ./charts/argo-cwl-runner/files/user-settings.json
         }
       # argo water bodies
       - name: argo-water-bodies
-        chartPath: argo-water-bodies
+        chartPath: ./charts/argo-water-bodies
         namespace: eoap-event-driven
         valuesFiles:
-          - argo-water-bodies/values.yaml
+          - ./charts/argo-water-bodies/values.yaml
         setFiles: {
-          appPackage: ./argo-water-bodies/files/app-package.json,
-          inputSchema: ./argo-water-bodies/files/input-parameters-schema.json
+          appPackage: ./charts/argo-water-bodies/files/app-package.json,
+          inputSchema: ./charts/argo-water-bodies/files/input-parameters-schema.json
         }
         setValues: 
           storageClassRWX: "standard"
