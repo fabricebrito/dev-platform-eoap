@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Sensor
 metadata:
-  name: redis-stream-logger
+  name: acme-sentinel2-stream-source-logger
 spec:
   eventBusName: jetstream-event-bus
 
