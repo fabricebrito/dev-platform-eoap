@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Sensor
 metadata:
-  name: water-bodies-detection-sensor
+  name: acme-water-bodies-detection-sensor
 spec:
   eventBusName: jetstream-event-bus
   template:
