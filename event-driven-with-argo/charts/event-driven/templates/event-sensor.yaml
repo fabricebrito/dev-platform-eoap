@@ -7,9 +7,9 @@ spec:
   template:
     serviceAccountName: argo
   dependencies:
-    - name: redis-stream
-      eventSourceName: sentinel2-stream-source
-      eventName: acquisition-event
+    - name: acme-sentinel2-stream
+      eventSourceName: acme-sentinel2-stream-source
+      eventName: acme-sentinel2-stream-source-collected
       transform:
         jq: ".values.href = [ .values.href ]"
   triggers:
@@ -41,6 +41,6 @@ spec:
                   name: water-bodies-detection
           parameters:
             - src:
-                dependencyName: redis-stream
+                dependencyName: acme-sentinel2-stream
                 dataKey: values.href
               dest: spec.arguments.parameters.0.value
