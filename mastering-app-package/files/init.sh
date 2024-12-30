@@ -19,7 +19,7 @@ echo '{"workbench.colorTheme": "Visual Studio Dark"}' > /workspace/User/settings
 
 python -m venv /workspace/.venv
 source /workspace/.venv/bin/activate
-/workspace/.venv/bin/python -m pip install --no-cache-dir rasterio click pystac loguru pyproj shapely scikit-image pystac rio_stac ipykernel stactools[validate] calrissian
+/workspace/.venv/bin/python -m pip install --no-cache-dir rasterio click pystac loguru pyproj shapely scikit-image pystac rio_stac ipykernel stactools[validate] calrissian matplotlib pandas nose2
 /workspace/.venv/bin/python -m ipykernel install --user --name mastering_env --display-name "Python (Mastering Application Package)"
 
 echo "**** install kubectl ****" 

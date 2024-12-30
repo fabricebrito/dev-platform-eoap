@@ -10,7 +10,7 @@ deploy:
         remoteChart: zoo-project/zoo-project-dru
         namespace: eoap-zoo-project
         createNamespace: true
-        version: 0.3.2
+        version: 0.3.6
         valuesFiles: 
         - values.yaml
         setValues:
@@ -20,11 +20,6 @@ deploy:
           filter_in.enabled: true
           filter_out.enabled: true
           persistence.procServicesAccessMode: ReadWriteMany
-        # setFiles: {
-        #   files.cwlwrapperAssets."main.yaml": ./files/cwlwrapper-assets/main.yaml,
-        # }
-          # files.cwlwrapperAssets:
-          #   "main.yaml": "a:1"
       - name: eoap-zoo-project-coder
         chartPath: ../charts/coder
         namespace: eoap-zoo-project

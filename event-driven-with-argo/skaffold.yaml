@@ -23,7 +23,7 @@ deploy:
         createNamespace: true
         wait: true
         setValues:
-          crds.install: false
+          crds.install: true
           server.authModes: [server]
           singleNamespace: true
           workflow:
@@ -60,7 +60,7 @@ deploy:
         wait: true
         createNamespace: true
         setValues:
-          crds.install: false
+          crds.install: true
           controller:
             rbac:
               enabled: true
