@@ -199,7 +199,7 @@ spec:
               workflow_name \"{{ `{{workflow.name}}`}}\" \
               workflow_status \"{{ `{{workflow.status}}`}}\" \
               href \"$item\" \
-              stac-catalog  \"$catalog\"" | redis-cli -h redis-service -p 6379
+              stac_catalog  \"$catalog\"" | redis-cli -h redis-service -p 6379
           
     - name: notify-redis-failure
       script:
