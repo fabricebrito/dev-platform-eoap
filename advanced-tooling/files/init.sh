@@ -4,7 +4,7 @@ set -x
 
 cd /workspace
 
-git clone 'https://github.com/fabricebrito/eoap-taskfile.git'
+git clone 'https://github.com/eoap/advanced-tooling.git'
 
 code-server --install-extension ms-python.python 
 code-server --install-extension redhat.vscode-yaml
@@ -19,7 +19,7 @@ echo '{"workbench.colorTheme": "Visual Studio Dark"}' > /workspace/User/settings
 
 python -m venv /workspace/.venv
 source /workspace/.venv/bin/activate
-/workspace/.venv/bin/python -m pip install --no-cache-dir tomlq
+/workspace/.venv/bin/python -m pip install --no-cache-dir tomlq calrissian
 # /workspace/.venv/bin/python -m ipykernel install --user --name mastering_env --display-name "Python (Mastering Application Package)"
 
 echo "**** install kubectl ****" 
