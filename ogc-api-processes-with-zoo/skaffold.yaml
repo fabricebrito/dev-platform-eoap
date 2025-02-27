@@ -16,7 +16,7 @@ deploy:
         setValues:
           iam.enabled: false
           cookiecutter.templateUrl: https://github.com/eoap/zoo-service-template.git
-          cookiecutter.templateBranch: feature-collection
+          cookiecutter.templateBranch: main
           filter_in.enabled: true
           filter_out.enabled: true
           persistence.procServicesAccessMode: ReadWriteMany
