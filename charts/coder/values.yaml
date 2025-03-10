@@ -4,11 +4,15 @@ coder:
   workspace: quickwin
   storageClassName: standard
   workspaceStorage: 20Gi
+  securityContext:
+    privileged: true
 
 calrissian:
-  enabled: False
+  enabled: True
   storage: 10Gi
   storageClassName: standard
+  imagePullSecrets:
+    - kaniko-secret
 
 coderResources:
   limits:
@@ -17,3 +21,6 @@ coderResources:
   requests:
     cpu: '1'
     memory: '4294967296'
+
+skaffold:
+  enabled: False
