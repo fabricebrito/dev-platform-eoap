@@ -10,22 +10,23 @@ deploy:
         remoteChart: zoo-project/zoo-project-dru
         namespace: eoap-zoo-project
         createNamespace: true
-        version: 0.3.23
+        version: 0.3.36
         valuesFiles: 
         - values.yaml
         setValues:
           iam.enabled: false
           cookiecutter.templateUrl: https://github.com/eoap/zoo-service-template.git
-          cookiecutter.templateBranch: main
+          cookiecutter.templateBranch: feature-secrets-nodeselector-imagepullsecrets
           filter_in.enabled: true
           filter_out.enabled: true
           persistence.procServicesAccessMode: ReadWriteMany
-          customConfig.main.additional_parameters: |-
-            s3_bucket=results
-            region_name=us-east-1
-            aws_secret_access_key=test
-            aws_access_key_id=test
-            endpoint_url=http://eoap-zoo-project-localstack.eoap-zoo-project.svc.cluster.local:4566
+          workflow.additionalInputs:
+            s3_bucket: results
+            region_name: us-east-1
+            aws_secret_access_key: test
+            aws_access_key_id: test
+            endpoint_url: http://eoap-zoo-project-localstack.eoap-zoo-project.svc.cluster.local:4566
+
       - name: eoap-zoo-project-coder
         chartPath: ../charts/coder
         namespace: eoap-zoo-project
