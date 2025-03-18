@@ -10,13 +10,13 @@ deploy:
         remoteChart: zoo-project/zoo-project-dru
         namespace: eoap-zoo-project
         createNamespace: true
-        version: 0.3.36
+        version: 0.4.2
         valuesFiles: 
         - values.yaml
         setValues:
           iam.enabled: false
           cookiecutter.templateUrl: https://github.com/eoap/zoo-service-template.git
-          cookiecutter.templateBranch: feature-secrets-nodeselector-imagepullsecrets
+          cookiecutter.templateBranch: feature-collection
           filter_in.enabled: true
           filter_out.enabled: true
           persistence.procServicesAccessMode: ReadWriteMany
