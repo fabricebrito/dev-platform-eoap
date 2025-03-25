@@ -42,7 +42,7 @@ spec:
         - name: code-server
           image: {{ .Values.coder.coderImage }}
           securityContext:
-            privileged: true
+            privileged: {{ .Values.coder.securityContext.privileged }}
           command: ["/bin/bash", "-c"]
           args:
             - >
